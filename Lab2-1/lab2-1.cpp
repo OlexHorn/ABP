@@ -28,4 +28,6 @@ int main() {
 	} while (abs(term) >= 0.000001);
 	
 	cout << "Series: " << sum << endl;
+	
+	return 0;
 }
