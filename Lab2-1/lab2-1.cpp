@@ -16,8 +16,8 @@ int main() {
 	// an = (-1)^n * (n^2 + 1) * (n^3 + 3)
 	
 	do {
-		k1 = n*n + 1;
-		k2 = n*n*n + 3;
+		k1 = pow(n, 2) + 1;
+		k2 = pow(n, 3) + 3;
 		term = sign * k1 / k2;
 		sum += term;
 		
@@ -25,9 +25,11 @@ int main() {
 		
 		sign *= -1;
 		n++;
+		
 	} while (abs(term) >= 0.000001);
 	
 	cout << "Series: " << sum << endl;
+	cout << "Number of iterations: " << --n << endl;
 	
 	return 0;
 }
