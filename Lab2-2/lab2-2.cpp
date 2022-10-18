@@ -32,4 +32,10 @@ int main(void) {
 	
 	return 0; 
 
-} 
+}
+
+/*
+Flange B 3 350
+Adapter P 8 84
+Bed O 1 117050
+*/

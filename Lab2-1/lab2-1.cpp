@@ -13,7 +13,7 @@ int main() {
 	double k2 = 0;
 	short sign = 1;
 	
-	// an = (-1)^n * (n^2 + 1) * (n^3 + 3)
+	// an = (-1)^n * (n^2 + 1) / (n^3 + 3)
 	
 	do {
 		k1 = pow(n, 2) + 1;
