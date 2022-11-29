@@ -16,23 +16,26 @@ struct stack {
 
 
 stack* createStack() {
-	int detailNumber;
+	int n;
 	stack* elem = NULL;
 	stack* st = NULL;
 	
-	cout << "Enter the number of details: ";
-	cin >> detailNumber;
-	
-	for(int i = 0; i < detailNumber; i++) {
+	do {
 		elem = new(stack);
+		cout << "Enter detail info with number " << n + 1 << ": ";
 		
-		cout << "Enter detail info with number " << i + 1 << ": ";
-		cin >> elem->detail.name >> elem->detail.type >> elem->detail.number >> elem->detail.weight;
-			
+		cin >> elem->detail.name;
+		
+		if (elem->detail.name == "***") break;
+		
+		cin >> elem->detail.type >> elem->detail.number >> elem->detail.weight;
+		
 		elem->next = st;
-		st = elem;	
-	}
-	
+		st = elem;
+		n++;	
+			
+	} while (n < 10);
+		
 	return st;
 	
 }
@@ -52,24 +55,11 @@ stack* addElementToStack(stack* st, struct detailInfo detail) {
 	return elem;
 }
 
-void printStac(stack* st) {
-	int i = 0;
-	
-	do {
-		cout << i + 1 << " detail: " << st->detail.name << ", " << st->detail.type 
-			<< ", " << st->detail.number << ", " << st->detail.weight << endl;
-		st = st->next;
-		i++;
-	} while (st != NULL);
-}
-
 
 void printStack(stack* stToPrint) {
-	
-	
-	int maxNameLen = 0;
-	int maxNumberLen = 0;
-	int maxWeightLen = 0;
+	int maxNameLen = 4;
+	int maxNumberLen = 6;
+	int maxWeightLen = 6;
 		
 	int i = 0;	
 	stack* st = stToPrint;
@@ -97,11 +87,36 @@ void printStack(stack* stToPrint) {
 	} while (st != NULL);
 	
 	
+	string topline = "|";	
+	for (int i = 0; i < maxNameLen + maxNumberLen + maxWeightLen + 7; i++){
+		topline += "-";
+	}
+	topline += "|";	
+	
+	cout << topline << endl;
+		
+	string nameSpace = "";
+	string numberSpace = "";
+	string weightSpace = "";
+	
+	for (int i = 0; i < maxNameLen - 4; i++){
+		nameSpace += " ";
+	}		
+	for (int i = 0; i < maxNumberLen - 6; i++){
+		numberSpace += " ";
+	}
+	for (int i = 0; i < maxWeightLen - 6; i++){
+		weightSpace += " ";
+	}
+	
+	cout << "|" << "Name" << nameSpace << "|" << "Type" << "|" << "Number" 
+		<< numberSpace << "|" << "Wegiht" << weightSpace << "|" << endl;
+	
 	string line = "|";	
 	for (int i = 0; i < maxNameLen; i++){
 		line += "-";
 	}	
-	line += "|-|";
+	line += "|----|";
 	for (int i = 0; i < maxNumberLen; i++){
 		line += "-";
 	}	
@@ -111,13 +126,12 @@ void printStack(stack* stToPrint) {
 	}
 	line += "|";	
 	
-	cout << line << endl;
-	
-	
+		
 	i = 0;	
 	st = stToPrint;
 	
 	do {
+		cout << line << endl;
 		string name = st->detail.name;
 		string numberStr = to_string(st->detail.number);
 		string weightStr = to_string(st->detail.weight); 
@@ -137,14 +151,14 @@ void printStack(stack* stToPrint) {
 			weightSpace += " ";
 		}
 		
-		cout << "|" << name << nameSpace << "|" << st->detail.type << "|" << numberStr 
+		cout << "|" << name << nameSpace << "|" << st->detail.type << "   |" << numberStr 
 			<< numberSpace << "|" << weightStr << weightSpace << "|" << endl;
-		
-		cout << line << endl;
-		
+				
 		st = st->next;
 		i++;
 	} while (st != NULL);
+	
+	cout << topline << endl;
 	
 }
 

@@ -9,12 +9,12 @@ struct detail {
 	int weight;
 };
 
-void printArray(struct detail* details, int detailNumber) {
-	int maxNameLen = 0;
-	int maxNumberLen = 0;
-	int maxWeightLen = 0;
+void printDetails(struct detail* details, int n) {
+	int maxNameLen = 4;
+	int maxNumberLen = 6;
+	int maxWeightLen = 6;
 	
-	for (int i = 0; i < detailNumber; i++) {
+	for (int i = 0; i < n; i++) {
 		
 		string name = details[i].name;
 		string numberStr = to_string(details[i].number);
@@ -33,11 +33,17 @@ void printArray(struct detail* details, int detailNumber) {
 		}
 	}
 	
+	string topline = "|";	
+	for (int i = 0; i < maxNameLen + maxNumberLen + maxWeightLen + 7; i++){
+		topline += "-";
+	}
+	topline += "|";	
+	
 	string line = "|";	
 	for (int i = 0; i < maxNameLen; i++){
 		line += "-";
 	}	
-	line += "|-|";
+	line += "|----|";
 	for (int i = 0; i < maxNumberLen; i++){
 		line += "-";
 	}	
@@ -46,11 +52,30 @@ void printArray(struct detail* details, int detailNumber) {
 		line += "-";
 	}
 	line += "|";	
+		
+	cout << topline << endl;
+		
+	string nameSpace = "";
+	string numberSpace = "";
+	string weightSpace = "";
+	
+	for (int i = 0; i < maxNameLen - 4; i++){
+		nameSpace += " ";
+	}		
+	for (int i = 0; i < maxNumberLen - 6; i++){
+		numberSpace += " ";
+	}
+	for (int i = 0; i < maxWeightLen - 6; i++){
+		weightSpace += " ";
+	}
+	
+	cout << "|" << "Name" << nameSpace << "|" << "Type" << "|" << "Number" 
+		<< numberSpace << "|" << "Wegiht" << weightSpace << "|" << endl;
 	
 	
-	cout << line << endl;
-	
-	for (int i = 0; i < detailNumber; i++){
+	for (int i = 0; i < n; i++){
+		cout << line << endl;
+		
 		string name = details[i].name;
 		string numberStr = to_string(details[i].number);
 		string weightStr = to_string(details[i].weight); 
@@ -70,34 +95,38 @@ void printArray(struct detail* details, int detailNumber) {
 			weightSpace += " ";
 		}
 		
-		cout << "|" << name << nameSpace << "|" << details[i].type << "|" << numberStr 
+		cout << "|" << name << nameSpace << "|" << details[i].type << "   |" << numberStr 
 			<< numberSpace << "|" << weightStr << weightSpace << "|" << endl;
-		
-		cout << line << endl;
 		
 	}
 	
-	
+	cout << topline << endl;
 }
 
 int main() {
 	
-	int detailNumber = 0;
+	struct detail* details = new struct detail[10];
 	
-	cout << "Enter the number of details: ";
-	cin >> detailNumber;
+	int n = 0;
+	string input;
 	
-	struct detail* details = new struct detail[detailNumber];
+	do {
+		cout << "Enter detail info with number " << n + 1 << ": ";
+		
+		cin >> details[n].name;
+		
+		if (details[n].name == "***") break;
+		
+		cin >> details[n].type >> details[n].number >> details[n].weight;
+		n++;	
+			
+	} while (n < 10);
 	
-	for (int i = 0; i < detailNumber; i++) {
-		cout << "Enter detail info with number " << i + 1 << ": ";
-		cin >> details[i].name >> details[i].type >> details[i].number >> details[i].weight;
-	}
 	
 	struct detail tmp;
 	
-	for (int i = 0; i < detailNumber; i++) {
-		for (int j = i + 1; j < detailNumber; j++) {
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++) {
 			if (details[i].name > details[j].name) {
 				tmp = details[i];
 				details[i] = details[j];
@@ -107,7 +136,7 @@ int main() {
 	}
 	
 	
-	printArray(details, detailNumber);
+	printDetails(details, n);
 	
 	delete [] details;
 	
