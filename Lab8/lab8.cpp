@@ -2,7 +2,7 @@
 
 using namespace std;
 
-struct detailType {
+struct detailInfo {
 	string name;
 	char type;
 	int number;
@@ -10,7 +10,7 @@ struct detailType {
 };
 
 struct stack {
-	struct detailType detail;
+	struct detailInfo detail;
 	stack* next; 
 };
 
@@ -44,7 +44,7 @@ stack* getElementFromStack(stack* st) {
 	return elem;
 }
 
-stack* addElementToStack(stack* st, struct detailType detail) {
+stack* addElementToStack(stack* st, struct detailInfo detail) {
 	stack* elem = new(stack);
 	elem->detail = detail;
 	elem->next = st;
@@ -52,7 +52,7 @@ stack* addElementToStack(stack* st, struct detailType detail) {
 	return elem;
 }
 
-void printStack(stack* st) {
+void printStac(stack* st) {
 	int i = 0;
 	
 	do {
@@ -61,6 +61,91 @@ void printStack(stack* st) {
 		st = st->next;
 		i++;
 	} while (st != NULL);
+}
+
+
+void printStack(stack* stToPrint) {
+	
+	
+	int maxNameLen = 0;
+	int maxNumberLen = 0;
+	int maxWeightLen = 0;
+		
+	int i = 0;	
+	stack* st = stToPrint;
+	
+	do {
+		string name = st->detail.name;
+		string numberStr = to_string(st->detail.number);
+		string weightStr = to_string(st->detail.weight); 
+		
+		
+		if (maxNameLen < name.length()) {
+			maxNameLen = name.length();
+		}
+		
+		if (maxNumberLen < numberStr.length()){
+			maxNumberLen = numberStr.length();
+		}
+		
+		if (maxWeightLen < weightStr.length()){
+			maxWeightLen = weightStr.length();
+		}
+		
+		st = st->next;
+		i++;
+	} while (st != NULL);
+	
+	
+	string line = "|";	
+	for (int i = 0; i < maxNameLen; i++){
+		line += "-";
+	}	
+	line += "|-|";
+	for (int i = 0; i < maxNumberLen; i++){
+		line += "-";
+	}	
+	line += "|";
+	for (int i = 0; i < maxWeightLen; i++){
+		line += "-";
+	}
+	line += "|";	
+	
+	cout << line << endl;
+	
+	
+	i = 0;	
+	st = stToPrint;
+	
+	do {
+		string name = st->detail.name;
+		string numberStr = to_string(st->detail.number);
+		string weightStr = to_string(st->detail.weight); 
+		
+		
+		string nameSpace = "";
+		string numberSpace = "";
+		string weightSpace = "";
+		
+		for (int i = 0; i < maxNameLen - name.length(); i++){
+			nameSpace += " ";
+		}		
+		for (int i = 0; i < maxNumberLen - numberStr.length(); i++){
+			numberSpace += " ";
+		}
+		for (int i = 0; i < maxWeightLen - weightStr.length(); i++){
+			weightSpace += " ";
+		}
+		
+		cout << "|" << name << nameSpace << "|" << st->detail.type << "|" << numberStr 
+			<< numberSpace << "|" << weightStr << weightSpace << "|" << endl;
+		
+		cout << line << endl;
+		
+		st = st->next;
+		i++;
+	} while (st != NULL);
+	
 }
 
 
@@ -78,7 +163,7 @@ int countElements(stack* st) {
 stack* sortStack(stack* st) {
 	int length = countElements(st);
 	
-	struct detailType tmp1, tmp2;
+	struct detailInfo tmp1, tmp2;
 	stack* tmpSt = NULL;
 	stack* sortedSt = NULL;
 	
