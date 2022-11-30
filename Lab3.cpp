@@ -4,7 +4,7 @@ using namespace std;
 
 int main() {
 	int n = 200;
-	int* arr = new int[n];
+	int arr[n];
 	
 	for (int i = 0; i < n; i++) {
 		arr[i] = rand() % 101 - 50;
