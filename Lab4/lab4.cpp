@@ -17,15 +17,15 @@ int main() {
 	int i = 4;
 	int j = 4;
 	
-	int circle = 1;
-	int circleIteration = 0;
+	int step = 1;
+	int iteration = 0;
 	Movement move = LEFT;	                        	
 	arr[i][j] = number;
 	
 	do {
 		switch (move) {
 			case LEFT:
-				for (int k = 0; k < circle; k++) {
+				for (int k = 0; k < step; k++) {
 					j--;
 					number++;
 					arr[i][j] = number;	
@@ -33,7 +33,7 @@ int main() {
 				move = DOWN;
 				break;
 			case DOWN:
-				for (int k = 0; k < circle; k++) {
+				for (int k = 0; k < step; k++) {
 					i++;
 					number++;
 					arr[i][j] = number;	
@@ -41,7 +41,7 @@ int main() {
 				move = RIGHT;
 				break;
 			case RIGHT:
-				for (int k = 0; k < circle; k++) {
+				for (int k = 0; k < step; k++) {
 					j++;
 					number++;
 					arr[i][j] = number;	
@@ -49,7 +49,7 @@ int main() {
 				move = UP;
 				break;
 			case UP:
-				for (int k = 0; k < circle; k++) {
+				for (int k = 0; k < step; k++) {
 					i--;
 					number++;	
 					arr[i][j] = number;
@@ -58,11 +58,11 @@ int main() {
 				break;
 		}
 		
-		circleIteration++;
+		iteration++;
 		
-		if (circleIteration == 2) {
-			circle++;
-			circleIteration = 0;
+		if (iteration == 2) {
+			step++;
+			iteration = 0;
 		}
 	} while (i > 0 || j > 0);
 	
