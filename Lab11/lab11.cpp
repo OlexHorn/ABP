@@ -94,16 +94,23 @@ public:
 
 
 int main() {
+	cout << "Default ---------------" << endl;
 	Car defaultCar;
 	defaultCar.show();
 	
+	cout << "Initialized--------------" << endl;
 	Car car("BMW", 2001, "Black");
 	car.show();
 	car.showColor();
 	
+	cout << "Sold-------------------" << endl;
 	SoldCar soldCar("Mercedes", 1991, "White", "Ivanov Ivan Ivanocich");
 	soldCar.show();
 	soldCar.showColor();
+	
+	cout << "Copy of sold-------------" << endl;
+	Car copyCar(soldCar);
+	copyCar.show();
 	
 	return 0;
 }
