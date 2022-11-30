@@ -99,6 +99,17 @@ public:
 		
 		spaces--;
 	}
+	
+	~Tree() {
+		deleteNode(firstNode);
+	}
+	
+	void deleteNode(Node* node) {
+		if (node == NULL) return;
+		deleteNode(node->left);
+		deleteNode(node->right);
+		delete node;
+	}
 
 };
 
