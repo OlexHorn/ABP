@@ -42,11 +42,9 @@ private:
 
 public:
 	Node* firstNode;
-	int depth;
 	
 	Tree() {
 		firstNode = NULL;
-		depth = 0;
 	}
 	
 	Tree(Node* node) {

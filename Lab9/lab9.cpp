@@ -241,7 +241,7 @@ void sortInFile(){
 	}
 	
 
-	for (int i = 0; i < n - 1; i++) {
+	for (int i = 0; i < n; i++) {
 		file.clear();
 		file.seekg(0);
 		
@@ -254,9 +254,10 @@ void sortInFile(){
 		for (int j = 1; j < n - i; j++) {
 			file >> tmpDetail->name >> tmpDetail->type >> tmpDetail->number >> tmpDetail->weight;
 			
-			if (tmpDetail->name > maxDetail->name) {
+			if (tmpDetail->name < maxDetail->name) {
 				maxDetail = tmpDetail;
 				maxn = j;
+				tmpDetail = new(detailInfo);
 			}
 		}
 		
